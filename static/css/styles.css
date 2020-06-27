@@ -1,0 +1,18 @@
+body {
+	background-color: black;
+}
+h1, h2, h3 {
+	color: #d4d4d4;
+}
+p, label {
+	color: white;
+}
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:white;
+  height: 1px;
+}

@@ -4,24 +4,29 @@
 	<head>
 		<title>Nasa Photo of the Day</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!--Link CSS files here - I've linked custom & BootStrap CSS files-->
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css')}}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
 	</head>
 	
 	<body>
 		<div class="container text-center mt-4 mb-4">
 			<div class="col-lg-12 col-md-12 mb-12">
+				<h1>NASA Photo of the Day: {{ date }} </h1>
 				<img class="img-responsive python-image mb-4" src="{{ image }}">
-				<h1>Nasa Photo of the Day</h1>
+				<h1>{{ title }}</h1>
+				<p>{{ explanation }}</p>
+			</div>
+			<hr>
+			<div>
+				<h3> {{ find_photo_text }} </h3>
 				<br>
 				<form method="post" action="/photo">
 					<div class="form-group">
 						<label for="date">Enter a date:</label>
 						<input type="date" name="date" id="date" required="required">
+						<button type="submit" id="submit-button" class="btn btn-light btn-sm">Submit</button>
 					</div>
-					<button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 		</div>
