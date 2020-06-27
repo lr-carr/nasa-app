@@ -22,19 +22,35 @@ def return_page_with_photo_info(photo_date, find_photo_text):
 	date = photo_date.strftime("%a %-d %B, %Y")
 	print(date)
 
-	return render_template("index.html", explanation=img_expl, title=img_title, image=img_url, date=date, find_photo_text=find_photo_text)
+	return render_template("photo.html", explanation=img_expl, title=img_title, image=img_url, date=date, find_photo_text=find_photo_text)
 
 
 @app.route("/")
 def home_page():
+	return render_template("index.html")
+
+
+@app.route("/photo")
+def photo_page():
 	today = date.today()
 	return return_page_with_photo_info(today, "Find past photos of the day")
 
 
-@app.route("/photo", methods=['POST'])
-def photo():
+@app.route("/pastphoto", methods=['POST'])
+def past_photo_page():
 	form_date = request.form["date"]
 	date = datetime.strptime(form_date, "%Y-%m-%d").date()
 	return return_page_with_photo_info(date, "Find another photo of the day")
+
+
+@app.route("/mars")
+def mars_page():
+	return render_template("mars.html")
+
+
+@app.route("/about")
+def about_page():
+	return render_template("about.html")
+
 
 app.run(debug=True)
