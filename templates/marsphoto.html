@@ -50,26 +50,10 @@
 	<div class="container text-center mt-4 mb-4">
 		<!--/Current photo-->
 		<div class="col-lg-12 col-md-12 mb-12">
-			<h1>NASA Photo of the Day: {{ date }} </h1>
+			<h1>Mars photo</h1>
 			<img class="img-responsive python-image mb-4" src="{{ image }}">
-			<h1>{{ title }}</h1>
-			<p>{{ explanation }}</p>
 		</div>
-		<!--/.Current photo-->
-		<hr>
-		<!--/Search for another photo-->
-		<div>
-			<h3> {{ find_photo_text }} </h3>
-			<br>
-			<form method="post" action="/pastphoto">
-				<div class="form-group">
-					<label for="date">Enter a date:</label>
-					<input type="date" name="date" id="date" required="required">
-					<button type="submit" id="submit-button" class="btn btn-light btn-sm">Submit</button>
-				</div>
-			</form>
-		</div>
-		<!--/.Search for another photo-->
+	
 	</div>
 	<!--/.Main content-->
 

@@ -51,6 +51,36 @@
 		<div class="col-lg-12 col-md-12 mb-12">
 			<h1>Mars rover</h1>
 			<p>Text here</p>
+			<h3>Search photos by sol and camera type</h1>
+			<form method="post" action="/mars-photo">
+				<div class="form-group">
+    				<label for="rover">Camera type</label>
+    				<select class="form-control" id="rover", name="rover">
+      					<option value="curiosity">Curiosity</option>
+      					<option value="opportunity">Opportunity</option>
+      					<option value="spirit">Spirit</option>
+    				</select>
+  				</div>
+				<div class="form-group">
+    				<label for="camera">Camera type</label>
+    				<select class="form-control" id="camera", name="camera">
+      					<option value="FHAZ">Front Hazard Avoidance Camera</option>
+      					<option value="RHAZ">Rear Hazard Avoidance Camera</option>
+      					<option value="MAST">Mast Camera</option>
+      					<option value="CHEMCAM">Chemistry and Camera Complex</option>
+      					<option value="MAHLI">Mars Hand Lens Imager</option>
+      					<option value="MARDI">Mars Descent Imager</option>
+      					<option value="NAVCAM">Navigation Camera</option>
+      					<option value="PANCAM">Panoramic Camera</option>
+      					<option value="MINITES">Miniature Thermal Emission Spectrometer (Mini-TES)</option>
+    				</select>
+  				</div>
+  				<div class="form-group">
+    				<label for="sol">Sol</label>
+    				<input class="form-control" id="sol" name="sol" placeholder="Enter an integer between 601-1000">
+  				</div>
+  				<button type="submit" id="submit-button" class="btn btn-light btn-sm">Submit</button>
+			</form>
 		</div>
 	</div>
 	<!--/.Main content-->
