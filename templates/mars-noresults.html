@@ -1,0 +1,13 @@
+{% extends "mars-layout.html" %}
+{% block mars_content %}
+  <div class="container text-center mt-4 mb-4">
+    <!--/Current photo-->
+    <div class="col-lg-12 col-md-12 mb-12">
+      <h1>No results. Try searching again</h1>
+    </div>
+
+    {% for photo_result in photo_results %}
+      <img class="img-responsive python-image mb-4" src="{{ photo_result.img_src }}">
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -28,8 +28,8 @@
 					<li class="nav-item dropdown mr-4">
 						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
 						<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item nav-option" href="/mars">Mars rover</a>
-							<a class="dropdown-item nav-option" href="/photo">Photo of the day</a>
+							<a class="dropdown-item nav-option" href="/mars-rover">Mars rover</a>
+							<a class="dropdown-item nav-option" href="/apod-today">Photo of the day</a>
 						</div>
 					</li>
 					<!--/.Options -->
@@ -44,34 +44,14 @@
 		</div>
 		<!-- Additional container -->
 	</nav>
-		<!--/.Navbar-->
+	<!--/.Navbar-->
 
-	<!--/Main content-->
-	<div class="container text-center mt-4 mb-4">
-		<!--/Current photo-->
-		<div class="col-lg-12 col-md-12 mb-12">
-			<h1>NASA Photo of the Day: {{ date }} </h1>
-			<img class="img-responsive python-image mb-4" src="{{ image }}">
-			<h1>{{ title }}</h1>
-			<p>{{ explanation }}</p>
-		</div>
-		<!--/.Current photo-->
-		<hr>
-		<!--/Search for another photo-->
-		<div>
-			<h3> {{ find_photo_text }} </h3>
-			<br>
-			<form method="post" action="/pastphoto">
-				<div class="form-group">
-					<label for="date">Enter a date:</label>
-					<input type="date" name="date" id="date" required="required">
-					<button type="submit" id="submit-button" class="btn btn-light btn-sm">Submit</button>
-				</div>
-			</form>
-		</div>
-		<!--/.Search for another photo-->
-	</div>
-	<!--/.Main content-->
+	<!--Page content-->
+	<div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!--/.Page content-->
 
 </body>
 
@@ -84,5 +64,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js')}}"></script>
+<!-- Custom JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/custom.js')}}"></script>
 
 </html>

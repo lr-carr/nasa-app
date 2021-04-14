@@ -1,72 +1,14 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>Nasa Photo of the Day</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css')}}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
-</head>
-
-<body>
-
-	<!--Navbar-->
-	<nav class="navbar navbar-expand-lg navbar-light white lighten-4 bottom-bord">
-		<!-- Additional container -->
-		<div class="container-fluid">
-			<!-- Navbar brand -->
-			<a class="navbar-brand mr-4" href="/"><img src="{{ url_for('static', filename='images/nasa-logo-web-rgb.png')}}" height="50" class="d-inline-block align-top" alt="mdb logo"></a>
-			<!-- Collapse button -->
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span></button>
-			<!-- Collapsible content -->
-			<div class="collapse navbar-collapse" id="basicExampleNav">
-				<!-- Links -->
-				<ul class="navbar-nav mr-auto gotham-light">
-					<!-- Options -->
-					<li class="nav-item dropdown mr-4">
-						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
-						<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item nav-option" href="/mars">Mars rover</a>
-							<a class="dropdown-item nav-option" href="/photo">Photo of the day</a>
-						</div>
-					</li>
-					<!--/.Options -->
-					<!-- About -->
-					<li class="nav-item mr-4">
-						<a class="nav-link" href="/about">About</a>
-					</li>
-					<!--/.About -->
-				</ul>
-				<!-- Links -->
-			</div>
-		</div>
-		<!-- Additional container -->
-	</nav>
-		<!--/.Navbar-->
-
-	<!--/Main content-->
+{% extends "mars-layout.html" %}
+{% block mars_content %}
 	<div class="container text-center mt-4 mb-4">
 		<!--/Current photo-->
 		<div class="col-lg-12 col-md-12 mb-12">
-			<h1>Mars photo</h1>
-			<img class="img-responsive python-image mb-4" src="{{ image }}">
+			<h1> {{ rover }} Rover photos from Sol {{ sol }}</h1>
+			<h3>Camera: {{ camera }}</h3>
 		</div>
-		
+
+    	{% for photo_result in photo_results %}
+    	  <img class="img-responsive python-image mb-4" src="{{ photo_result.img_src }}">
+    	{% endfor %}
 	</div>
-	<!--/.Main content-->
-
-</body>
-
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js')}}"></script>
-
-</html>
+{% endblock %}

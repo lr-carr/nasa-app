@@ -1,15 +1,22 @@
 from flask import Flask, render_template, request
 from datetime import date, datetime
 import requests
-import config
+import os
 
 
 app = Flask("NasaPhotoApp")
 
 
+@app.route("/")
+def home_page():
+	return render_template("index.html")
+
+
+########## Astronomy Photo of the Day ##########
+
 def return_page_with_photo_info(photo_date, find_photo_text):
 	url = 'https://api.nasa.gov/planetary/apod'
-	payload = {"api_key": config.api_key, "date": photo_date}
+	payload = {"api_key": os.environ["NASA_API_KEY"], "date": photo_date}
 	
 	response = requests.get(url, params=payload)
 	
@@ -21,37 +28,57 @@ def return_page_with_photo_info(photo_date, find_photo_text):
 
 	date = photo_date.strftime("%a %-d %B, %Y")
 
-	return render_template("photo.html", explanation=img_expl, title=img_title, image=img_url, date=date, find_photo_text=find_photo_text)
+	return render_template("apod.html",
+							explanation=img_expl,
+							title=img_title,
+							image=img_url,
+							date=date,
+							find_photo_text=find_photo_text)
 
 
-@app.route("/")
-def home_page():
-	return render_template("index.html")
-
-
-@app.route("/photo")
+@app.route("/apod-today")
 def photo_page():
 	today = date.today()
 	return return_page_with_photo_info(today, "Find past photos of the day")
 
 
-@app.route("/pastphoto", methods=['POST'])
+@app.route("/apod-search", methods=['POST'])
 def past_photo_page():
 	form_date = request.form["date"]
 	date = datetime.strptime(form_date, "%Y-%m-%d").date()
 	return return_page_with_photo_info(date, "Find another photo of the day")
 
 
-@app.route("/mars")
+############## Mars Rover Photos ##############
+
+
+def get_rover_info(rover_name):
+	url = 'https://api.nasa.gov/mars-photos/api/v1/manifests/' + rover_name
+	payload = {"api_key": os.environ["NASA_API_KEY"]}
+	response = requests.get(url, params=payload)
+	rover_data = response.json()
+	del rover_data["photo_manifest"]["photos"]
+	return rover_data["photo_manifest"]
+
+
+@app.route("/mars-rover")
 def mars_page():
-	return render_template("mars.html")
+	curiosity_data = get_rover_info("Curiosity")
+	spirit_data = get_rover_info("Spirit")
+	opportunity_data = get_rover_info("Opportunity")
+	rover_data = [curiosity_data, spirit_data, opportunity_data]
+	return render_template("mars-search.html", rover_data=rover_data)
 
 
-@app.route("/mars-photo", methods=['POST'])
+@app.route("/mars-rover-search", methods=['POST'])
 def mars_photo_page():
 	camera_type = request.form["camera"]
 	sol = request.form["sol"]
 	rover = request.form["rover"]
+
+	# If sol not entered in search, default to 1000
+	if not sol:
+		sol = "1000"
 
 	url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + rover + '/photos'
 	payload = {"api_key": config.api_key, "sol": sol, "camera": camera_type}
@@ -61,10 +88,13 @@ def mars_photo_page():
 	photo_results = mars_rover_data["photos"]
 
 	if not photo_results:
-		return render_template("noresultsmars.html")
+		return render_template("mars-noresults.html")
 	else:
-		first_image_url = photo_results[0]["img_src"]
-		return render_template("marsphoto.html", image=first_image_url, camera=camera_type, sol=sol, rover=rover.title())
+		return render_template("mars-photo.html",
+								photo_results=photo_results,
+								camera=camera_type,
+								sol=sol,
+								rover=rover.title())
 
 
 @app.route("/about")

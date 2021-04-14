@@ -1,0 +1,24 @@
+{% extends "mars-layout.html" %}
+{% block mars_content %}
+  <div class="container text-center mt-4 mb-4">
+    <!--/Current photo-->
+    <div class="col-lg-12 col-md-12 mb-12">
+      <h1>Mars Rover Photos</h1>
+      <p>NASA has three rovers on Mars: Curiosity, Opportunity, and Spirit.</p>
+      <p>Each rover has its own set of photos, and certain cameras.
+      Photos are organized by the sol (Martian rotation or day) on which they were taken, counting up from the rover's landing date.</p>
+    </div>
+
+<div class="row">
+    {% for rover in rover_data %}
+    <div class="col">
+      <h4>{{ rover.name }}</h3>
+      <h5>Launch date: {{ rover.launch_date }}</h5>
+      <h5>Landing date: {{ rover.landing_date }}</h5>
+      <h5>Max sol: {{ rover.max_sol }}</h5>
+      <h5>Total photos: {{ rover.total_photos }}</h5>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+{% endblock %}
