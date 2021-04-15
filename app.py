@@ -81,7 +81,7 @@ def mars_photo_page():
 		sol = "1000"
 
 	url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + rover + '/photos'
-	payload = {"api_key": config.api_key, "sol": sol, "camera": camera_type}
+	payload = {"api_key": os.environ["NASA_API_KEY"], "sol": sol, "camera": camera_type}
 	response = requests.get(url, params=payload)
 	
 	mars_rover_data = response.json()
