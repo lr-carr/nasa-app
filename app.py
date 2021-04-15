@@ -29,11 +29,11 @@ def return_page_with_photo_info(photo_date, find_photo_text):
 	date = photo_date.strftime("%a %-d %B, %Y")
 
 	return render_template("apod.html",
-							explanation=img_expl,
-							title=img_title,
-							image=img_url,
-							date=date,
-							find_photo_text=find_photo_text)
+				explanation=img_expl,
+				title=img_title,
+				image=img_url,
+				date=date,
+				find_photo_text=find_photo_text)
 
 
 @app.route("/apod-today")
@@ -91,10 +91,10 @@ def mars_photo_page():
 		return render_template("mars-noresults.html")
 	else:
 		return render_template("mars-photo.html",
-								photo_results=photo_results,
-								camera=camera_type,
-								sol=sol,
-								rover=rover.title())
+					photo_results=photo_results,
+					camera=camera_type,
+					sol=sol,
+					rover=rover.title())
 
 
 @app.route("/about")
